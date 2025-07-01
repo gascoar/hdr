@@ -4,7 +4,7 @@ Herramienta para evaluar la distancia de Hamming entre hashes (SHA-1) de reposit
 
 ## Compilacion
 
-**Dependencias**: libgit2, C++ std23 y Doxygen para generar la documentacion.
+**Dependencias**: el proyecto principal depende libgit2, C++ std23 y Doxygen para generar la documentacion. Para generar los plots hace falta python, pandas y matplotlib.
 
 ### Compilar hdr
 ```
