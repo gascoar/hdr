@@ -73,21 +73,3 @@ void Args::usage(void) {
     std::println("Uso: hash_analzer [commit inicial] [cmd] [abbrev len]\n");
     std::println("cmd:");
 }
-/*    else if (strcmp(cmd, "print") == 0)
-        hl.print_hashes();
-    else if (strcmp(cmd, "hd") == 0)
-        hl.hamming_calc();
-    else if (strcmp(cmd, "hist") == 0)
-        hl.histogram_calc();
-    else {
-        hl.hamming_calc();
-    }
-    if (argc < 3) {
-        std::cerr << "Error: some argument is missing." << std::endl;
-        usage();
-
-        return -1;
-    }
-*/
-
-
