@@ -69,7 +69,16 @@ int Args::run_cmd() {
 }
 
 void Args::usage(void) {
-    std::println("\nHash Analyzer\n");
-    std::println("Uso: hash_analzer [commit inicial] [cmd] [abbrev len]\n");
-    std::println("cmd:");
+   
+    std::string usage = "\nhdr\n"
+        "Uso: hdr cmd [--alen val]\n\n"
+        "$ cd <repo>\n\n"
+        "Obtener distancias de Hamming:\n"
+        "$ hdr hd [--alen <val>]\n\n"
+        "Obtener histograma:\n"
+        "$ hdr hist [--alen <val>]\n\n"
+        "Obtener minimo, maximo y valor medio:\n"
+        "$ hdr hdstats [--alen <val>]\n\n";
+
+    std::println("{}", usage);
 }
