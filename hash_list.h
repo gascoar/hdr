@@ -145,7 +145,7 @@ public:
             };
             buf[GIT_OID_SHA1_HEXSIZE] = '\0';
             if (print_abbrv) {
-                std::string_view sv(buf, this->abbrv_len);
+                std::string_view sv(buf, 2 * this->abbrv_len);
                 std::println("{}", sv);
             }
             else {
