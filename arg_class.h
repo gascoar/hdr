@@ -36,26 +36,21 @@ public:
 
 int Args::run_cmd() {
     int ret = 0;
+    HashList hl(repo_path, abbrv_len);
 
     if (strcmp(cmd, "help") == 0) {
         usage();
     } else if (strcmp(cmd, "stats") == 0) {
-        HashList hl(repo_path, abbrv_len);
         hl.repo_stats();
     } else if (strcmp(cmd, "print") == 0) {
-        HashList hl(repo_path, abbrv_len);
         hl.print_hashes(print_abbrv);
     } else if (strcmp(cmd, "hist") == 0) {
-        HashList hl(repo_path,  abbrv_len);
         hl.histogram_calc();
     } else if (strcmp(cmd, "hd") == 0) {
-        HashList hl(repo_path, abbrv_len);
         hl.hamming_calc(print_buf);
     } else if (strcmp(cmd, "hdstats") == 0) {
-        HashList hl(repo_path, abbrv_len);
         hl.hamming_calc(hd_stats);
     } else if (strcmp(cmd, "branch") == 0) {
-        HashList hl(repo_path, abbrv_len);
         std::string branch = hl.get_current_branch();
         std::println("{}", branch);
     } else {
