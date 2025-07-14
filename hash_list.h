@@ -178,11 +178,13 @@ public:
     }
 
     void histogram_calc() {
-        std::vector<unsigned long> cuentas(BITS_PER_SHA, 0);
+
         size_t nthreads = std::thread::hardware_concurrency();
         std::vector<std::thread> t;
         t.reserve(nthreads);
         std::vector<std::vector<unsigned long>> res_v;
+        const size_t CUENTAS_LEN = BITS_PER_SHA + 1;
+        std::vector<unsigned long> cuentas(CUENTAS_LEN, 0);
         /*
          * TODOs:
          *  - add check if walker is not initialized?
@@ -191,7 +193,7 @@ public:
         this->init_and_walk();
 
         for (size_t i = 0; i < nthreads; i++) {
-            res_v.push_back(std::vector<unsigned long>(BITS_PER_SHA, 0));
+            res_v.push_back(std::vector<unsigned long>(CUENTAS_LEN, 0));
         }
 
         try {
@@ -208,12 +210,12 @@ public:
         }
 
         for (size_t i = 0; i < nthreads; i++ ) {
-            for (size_t j = 0; j < BITS_PER_SHA; j++) {
-                cuentas[j] = cuentas[j] + res_v[i][j];
+            for (size_t j = 0; j < CUENTAS_LEN; j++) {
+                cuentas.at(j) = cuentas.at(j) + res_v.at(i).at(j);
             }
         }
 
-        for (size_t i = 0; i < BITS_PER_SHA; i++) {
+        for (size_t i = 0; i < CUENTAS_LEN; i++) {
             std::println("{},{}", i, cuentas[i]);
         }
     }
