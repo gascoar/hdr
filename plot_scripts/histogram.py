@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 ifile = sys.argv[1]
+outfile = sys.argv[2]
 df = pd.read_csv(ifile)
 
 x = df.iloc[:, 0]
@@ -14,4 +15,4 @@ plt.xlabel("Hamming Distance")
 plt.ylabel("Cuentas")
 plt.title("Histogram")
 plt.grid()
-plt.show()
+plt.savefig(outfile)
