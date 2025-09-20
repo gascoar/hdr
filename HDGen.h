@@ -1,3 +1,8 @@
+/**
+ * @file HDGen.h
+ * @brief Archivo de definición de clase HDGen y métodos asociados.
+ * @author Gaston Gonzalez (gascoar@gmail.com)
+ */
 class HDGen {
 private:
     size_t step;

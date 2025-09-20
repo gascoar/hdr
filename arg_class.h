@@ -4,6 +4,12 @@
 #include <algorithm>
 #include <filesystem>
 
+/**
+ * @file arg_class.h
+ *
+ * @brief Archivo que define la clase Args
+ */
+
 class Args {
 public:
     unsigned short abbrv_len = 12; // Valor default en el kernel up-to 04/2025

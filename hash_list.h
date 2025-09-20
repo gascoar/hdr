@@ -1,3 +1,8 @@
+/**
+ * @file hash_list.h
+ * @brief Archivo de definición de clase HashList y métodos asociados.
+ * @author Gaston Gonzalez (gascoar@gmail.com)
+ */
 #include <print>
 #include <git2.h>
 #include <string>
@@ -23,7 +28,7 @@ void per_thread_hamming(std::vector<git_oid> &hl, size_t stp, size_t ipos, size_
 
 /**
  * @brief Clase que contiene los metodos y miembros necesarios para interactuar
- * con un repositorio de git.
+ *
  */
 class HashList {
 public:
