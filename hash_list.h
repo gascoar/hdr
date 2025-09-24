@@ -17,6 +17,7 @@
 #include "hdstats.h"
 
 const unsigned int BITS_PER_SHA = 160;
+const unsigned int HEX_SYMBOLS_PER_SHA = 40;
 
 void hd_loop(std::vector<git_oid> &hl, unsigned int in_pos, unsigned int step,
              unsigned int abbrv_len);
@@ -140,22 +141,14 @@ public:
      * @brief Imprime todos los hashes en stdout.
      */
     void print_hashes(bool print_abbrv) {
-        char buf[GIT_OID_SHA1_HEXSIZE + 1];
         this->init_and_walk();
 
         for (long unsigned int i = 0; i < this->hash_list.size(); i++) {
             git_oid oid = this->hash_list[i];
-            if (git_oid_fmt(buf, &oid) != 0) {
-                throw std::runtime_error("print_hashes: error formatting git_oid");
-            };
-            buf[GIT_OID_SHA1_HEXSIZE] = '\0';
-            if (print_abbrv) {
-                std::string_view sv(buf, 2 * this->abbrv_len);
-                std::println("{}", sv);
-            }
-            else {
-                std::println("{}", buf);
-            }
+            if (print_abbrv)
+                print_short_hash(oid, this->abbrv_len);
+            else
+                print_short_hash(oid, HEX_SYMBOLS_PER_SHA);
         }
     }
 

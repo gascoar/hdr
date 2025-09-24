@@ -17,6 +17,18 @@ void print_hash(git_oid oid) {
     std::println("{}", buf);
 }
 
+void print_short_hash(git_oid oid, unsigned char len) {
+    char buf[GIT_OID_SHA1_HEXSIZE + 1];
+    if (git_oid_fmt(buf, &oid) != 0) {
+        throw std::runtime_error("print_hashes: error formatting git_oid");
+    };
+    buf[GIT_OID_SHA1_HEXSIZE] = '\0';
+
+    std::string_view v = std::string_view(buf).substr(0, len);
+
+    std::println("{}", v);
+}
+
 /*
  *
  * TODO: lo unico que hace esta funcion es establecer un maximo de tamaño de
