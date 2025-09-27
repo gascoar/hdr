@@ -9,36 +9,54 @@
  *
  * @brief Archivo que define la clase Args
  */
+
+/**
+ * @brief Clase para manejar los argumentos pasados por el usuario al programa.
+ *
+ */
 class Args {
 public:
-    unsigned short abbrv_len = 12; // Valor default en el kernel up-to 04/2025
+    unsigned short abbrv_len = 12; ///< Valor default en el kernel up-to 04/2025
     std::string repo_path;
     const char *cmd;
     std::vector<std::string> args;
-    bool print_abbrv = false; // Por default imprimimos los hash completos
+    bool print_abbrv = false; ///< Por default imprimimos los hash completos
+    Args(int argc, char *argv[]);
     int run_cmd();
     void usage();
-
-    Args (int argc, char *argv[]) {
-        std::vector<std::string> args(argv, argv + argc);
-        args = args;
-        repo_path = std::filesystem::current_path().string();
-
-        if (argc == 1) {
-            cmd = "help";
-        } else {
-            cmd = args[1].c_str();
-        }
-
-        auto it = std::find(args.begin(), args.end(), "--alen");
-        if (it != args.end()) {
-            it++;
-            abbrv_len = stoul(*it);
-            print_abbrv = true;
-        }
-    }
 };
 
+/**
+ * @brief Metodo constructor
+ *
+ * @param Los argumentos del programa: int argc, char *argv[]
+ */
+Args::Args(int argc, char *argv[]) {
+    std::vector<std::string> args(argv, argv + argc);
+    args = args;
+    repo_path = std::filesystem::current_path().string();
+
+    if (argc == 1) {
+        cmd = "help";
+    } else {
+        cmd = args[1].c_str();
+    }
+
+    auto it = std::find(args.begin(), args.end(), "--alen");
+    if (it != args.end()) {
+        it++;
+        abbrv_len = stoul(*it);
+        print_abbrv = true;
+    }
+}
+
+/**
+ * @brief Ejecuta un comando de acuerdo a los argumentos suministrados.
+ *
+ * @param No tiene parámetros.
+ *
+ * @return Retorna 0 en caso de exito, -1 en caso de error.
+ */
 int Args::run_cmd() {
     int ret = 0;
     HashList hl(repo_path, abbrv_len);
@@ -68,6 +86,13 @@ int Args::run_cmd() {
     return ret;
 }
 
+/**
+ * @brief Imprime el texto de uso del programa en stdout
+ *
+ * @param No tiene parámetros.
+ *
+ * @return No retorna ningun valor o elemento.
+ */
 void Args::usage(void) {
    
     std::string usage = "\nhdr\n"
