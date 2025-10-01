@@ -1,3 +1,5 @@
+#include "hdstats.h"
+
 double mean_of_vec(const std::vector<unsigned char> &data) {
     unsigned long long sum = 0;
     size_t len = data.size();
@@ -32,17 +34,6 @@ void print_buf(std::vector<unsigned char> &buf) {
         std::println("{}", buf.at(i));
     }
 }
-
-class HDStats {
-    unsigned char min;
-    unsigned char max;
-    double mean;
-
-public:
-    HDStats(unsigned char mi, unsigned char ma, double avg);
-    HDStats(std::vector<unsigned char> &vec);
-    void print();
-};
 
 void hd_stats(std::vector<unsigned char> &buf) {
     HDStats hds(buf);

@@ -1,10 +1,4 @@
-#include <print>
-#include <vector>
-#include <numeric>
-#include <cmath>
-
-const size_t MAX_BUF_SIZE = 65536;
-const size_t MIN_BUF_SIZE = 64;
+#include "utils.h"
 
 void print_hash(git_oid oid) {
     char buf[GIT_OID_SHA1_HEXSIZE + 1];
