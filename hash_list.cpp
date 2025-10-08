@@ -137,7 +137,6 @@ void HashList::hamming_calc(void (*proc_fun)(std::vector<unsigned char> &)) {
 }
 
 void HashList::histogram_calc() {
-
     size_t nthreads = std::thread::hardware_concurrency();
     std::vector<std::thread> t;
     t.reserve(nthreads);
