@@ -6,8 +6,7 @@
  * @param Los argumentos del programa: int argc, char *argv[]
  */
 Args::Args(int argc, char *argv[]) {
-    std::vector<std::string> args(argv, argv + argc);
-    args = args;
+    args = std::vector<std::string>(argv, argv + argc);
     repo_path = std::filesystem::current_path().string();
 
     if (argc == 1) {
