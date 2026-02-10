@@ -27,6 +27,7 @@ for t in l:
     y = t[0].iloc[:, 1]
     plt.bar(x, y, label = t[1], width = 0.8)
     plt.legend(loc = 'best')
+plt.xlim([0, 60])
 plt.xlabel("Hamming Distance")
 plt.ylabel("Cuentas")
 plt.title("Histogram")

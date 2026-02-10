@@ -122,9 +122,9 @@ void HashList::hamming_calc(void (*proc_fun)(std::vector<unsigned char> &)) {
     unsigned int nthreads = std::thread::hardware_concurrency();
     std::vector<std::thread> t;
     t.reserve(nthreads);
-    size_t len = this->hash_list.size();
 
     this->init_and_walk();
+    size_t len = this->hash_list.size();
     size_t chunk_size = get_buffer_size(len);
     for (size_t i = 0; i < nthreads; i++) {
         t.push_back(std::thread(per_thread_hamming, std::ref(this->hash_list), nthreads, i,
@@ -174,7 +174,7 @@ void HashList::histogram_calc() {
     }
 
     for (size_t i = 0; i < CUENTAS_LEN; i++) {
-        std::println("{},{}", i, cuentas[i]);
+        std::println("{},{}", i, cuentas.at(i));
     }
 }
 
