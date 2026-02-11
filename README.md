@@ -72,3 +72,7 @@ $ python plot_scripts/histogram.py /tmp/git_hist_9.csv
 Generan el siguiente grafico:
 
 ![Ejemplo de histograma para alen = 9](images/git_alen9.png)
+
+De forma similar se puede generar el grafico siguiente:
+
+![Histograma del kernel con alen = 6, 9 y 12](images/kernel_v6.15_alen_6_9_12.png)
