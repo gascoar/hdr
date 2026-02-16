@@ -44,6 +44,6 @@ plt.axvline(mu_fit - sigma_fit, color='orange', linestyle=':',
 plt.xlabel("Hamming Distance")
 plt.ylabel("Tasa repeticion")
 plt.title("Histograma y ajuste\n (ndh = %s)" %nexp)
-plt.legend()
+plt.legend(prop={'size': 8})
 plt.grid()
 plt.savefig(outfile)
