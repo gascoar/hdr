@@ -34,7 +34,6 @@ y_fit = Gauss(x, *params)
 end_x = mean * 2
 plt.plot(x, y, 'o', label='Data')
 plt.plot(x, y_fit, '-', label='Fit')
-plt.plot([], [], ' ', label=f"ndh = {nexp}")
 plt.xlim([0, end_x])
 plt.axvline(mean, color='green', linestyle='--', linewidth=2, label=f"Mean = {mu_fit:.3f}")
 plt.axvline(mu_fit + sigma_fit, color='orange', linestyle=':',
@@ -44,7 +43,7 @@ plt.axvline(mu_fit - sigma_fit, color='orange', linestyle=':',
             linewidth=2, label=f"μ - σ = {mu_fit - sigma_fit:.3f}")
 plt.xlabel("Hamming Distance")
 plt.ylabel("Tasa repeticion")
-plt.title("Histograma y ajuste")
+plt.title("Histograma y ajuste\n (ndh = %s)" %nexp)
 plt.legend()
 plt.grid()
 plt.savefig(outfile)
