@@ -12,7 +12,6 @@ def Gauss(x, A, mean, sigma):
 
     return fx
 
-
 ifile = sys.argv[1]
 outfile = sys.argv[2]
 df = pd.read_csv(ifile)
@@ -21,7 +20,6 @@ x = df.iloc[:, 0]
 y = df.iloc[:, 1]
 n = np.sum(y)
 nexp = '%.2E' % Decimal(n / 1.0)
-
 A0 = np.max(y)
 y = y/A0
 
@@ -39,17 +37,14 @@ plt.plot(x, y_fit, '-', label='Fit')
 plt.plot([], [], ' ', label=f"ndh = {nexp}")
 plt.xlim([0, end_x])
 plt.axvline(mean, color='green', linestyle='--', linewidth=2, label=f"Mean = {mu_fit:.3f}")
-
 plt.axvline(mu_fit + sigma_fit, color='orange', linestyle=':',
             linewidth=2, label=f"μ + σ = {mu_fit + sigma_fit:.3f}")
 
 plt.axvline(mu_fit - sigma_fit, color='orange', linestyle=':',
             linewidth=2, label=f"μ - σ = {mu_fit - sigma_fit:.3f}")
-
 plt.xlabel("Hamming Distance")
 plt.ylabel("Tasa repeticion")
 plt.title("Histograma y ajuste")
 plt.legend()
-#plt.show()
 plt.grid()
 plt.savefig(outfile)
