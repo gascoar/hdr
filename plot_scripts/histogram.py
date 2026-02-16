@@ -21,27 +21,23 @@ x = df.iloc[:, 0]
 y = df.iloc[:, 1]
 n = np.sum(y)
 nexp = '%.2E' % Decimal(n / 1.0)
-print("n = ", nexp)
 
 A0 = np.max(y)
 y = y/A0
 
-
 mean = np.average(x, weights = y)
 std = np.sqrt(np.sum(y * (x - mean)**2) / np.sum(y))
-
 p0 = [1, mean, std]
-
 params, covariance = curve_fit(Gauss, x, y, p0 = p0)
-
 A_fit, mu_fit, sigma_fit = params
-
 y_fit = Gauss(x, *params)
 
+
+end_x = mean * 2
 plt.plot(x, y, 'o', label='Data')
 plt.plot(x, y_fit, '-', label='Fit')
 plt.plot([], [], ' ', label=f"ndh = {nexp}")
-plt.xlim([0, 50])
+plt.xlim([0, end_x])
 plt.axvline(mean, color='green', linestyle='--', linewidth=2, label=f"Mean = {mu_fit:.3f}")
 
 plt.axvline(mu_fit + sigma_fit, color='orange', linestyle=':',
