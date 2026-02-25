@@ -6,6 +6,7 @@ import numpy as np
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 from decimal import Decimal
+from pathlib import Path
 
 def Gauss(x, A, mean, sigma):
     fx = A * np.sqrt(2 * np.pi) * np.exp(- (x - mean) * (x - mean) / (2 * sigma * sigma))
@@ -13,6 +14,11 @@ def Gauss(x, A, mean, sigma):
     return fx
 
 ifile = sys.argv[1]
+if not Path(ifile).is_file():
+    print("Error!")
+    print("El archivo:", ifile, "no existe", file=sys.stderr)
+    sys.exit()
+
 outfile = sys.argv[2]
 df = pd.read_csv(ifile)
 
@@ -46,4 +52,4 @@ plt.ylabel("Tasa repeticion")
 plt.title("Histograma y ajuste\n (ndh = %s)" %nexp)
 plt.legend(prop={'size': 8})
 plt.grid()
-plt.savefig(outfile)
+plt.savefig(outfile, dpi = 300)
