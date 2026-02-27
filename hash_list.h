@@ -32,6 +32,7 @@ void per_thread_hamming(std::vector<git_oid> &hl, size_t stp, size_t ipos, size_
 class HashList {
 public:
     git_repository *repo; ///< Puntero a un objeto del tipo git_repository (ver libgit2 API)
+    std::string strrepo; ///< Repo path (version imprimible)
     git_oid first_oid; ///< Primer objeto git_oid, necesario para iniciar el walk sobre el repositorio.
     git_revwalk *walker = NULL; ///< Puntero a un objeto git_revwalk (ver libgit2 API)
     std::vector<git_oid> hash_list; ///< Vector donde se guarda la lista de hashes en formato git_oid.

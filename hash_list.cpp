@@ -8,6 +8,7 @@
  */
 HashList::HashList(std::string repo_path, unsigned int alen) {
     const char *rp = repo_path.c_str();
+    strrepo = repo_path;
     abbrv_len = alen;
 
     if (git_libgit2_init() < 0) {
@@ -115,7 +116,10 @@ void HashList::print_hashes(bool print_abbrv) {
 
 void HashList::repo_stats() {
     this->init_and_walk();
+
+    std::println("- Repo: {}", this->strrepo);
     std::println("- Commits: {}", this->hash_list.size());
+    std::println("- Largo abreviado: {}", this->abbrv_len);
 }
 
 void HashList::hamming_calc(void (*proc_fun)(std::vector<unsigned char> &)) {
