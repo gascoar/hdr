@@ -11,6 +11,7 @@ Args::Args(int argc, char *argv[]) {
 
     if (argc == 1) {
         cmd = "help";
+        return;
     } else {
         cmd = args[1].c_str();
     }
@@ -32,11 +33,14 @@ Args::Args(int argc, char *argv[]) {
  */
 int Args::run_cmd() {
     int ret = 0;
-    HashList hl(repo_path, abbrv_len);
-
     if (strcmp(cmd, "help") == 0) {
         usage();
-    } else if (strcmp(cmd, "stats") == 0) {
+        return ret;
+    }
+
+    HashList hl(repo_path, abbrv_len);
+
+    if (strcmp(cmd, "stats") == 0) {
         hl.repo_stats();
     } else if (strcmp(cmd, "print") == 0) {
         hl.print_hashes(print_abbrv);

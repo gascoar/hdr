@@ -19,7 +19,12 @@ if not Path(ifile).is_file():
     print("El archivo:", ifile, "no existe", file=sys.stderr)
     sys.exit()
 
+# TODO: check output dir
 outfile = sys.argv[2]
+# TODO: check args
+alen = sys.argv[3]
+repo = sys.argv[4]
+
 df = pd.read_csv(ifile)
 
 x = df.iloc[:, 0]
@@ -36,6 +41,12 @@ params, covariance = curve_fit(Gauss, x, y, p0 = p0)
 A_fit, mu_fit, sigma_fit = params
 y_fit = Gauss(x, *params)
 
+textstr = '\n'.join((
+    'alen = $%s$' % (alen, ),
+    'Nro DH = $%.2E$' % (Decimal(n / 1.0), ),
+    "".join(['Repo: ', repo])))
+
+props = dict(boxstyle = 'round', facecolor = 'azure', edgecolor = 'grey', alpha = 0.5)
 
 end_x = mean * 2
 plt.plot(x, y, 'o', label='Data')
@@ -49,7 +60,8 @@ plt.axvline(mu_fit - sigma_fit, color='orange', linestyle=':',
             linewidth=2, label=f"μ - σ = {mu_fit - sigma_fit:.3f}")
 plt.xlabel("Hamming Distance")
 plt.ylabel("Tasa repeticion")
-plt.title("Histograma y ajuste\n (ndh = %s)" %nexp)
+plt.title("Histograma")
 plt.legend(prop={'size': 8})
+plt.text(0.4, 0.90, textstr, fontsize = 9, bbox = props)
 plt.grid()
 plt.savefig(outfile, dpi = 300)
