@@ -24,13 +24,14 @@ for i in range(2, len(sys.argv), 2):
 plt.figure()
 for t in l:
     x = t[0].iloc[:, 0]
-    y = t[0].iloc[:, 1]
+    y = t[0].iloc[:, 1] / t[0].iloc[:, 1].max()
+
     plt.bar(x, y, label = t[1], width = 0.8)
     plt.legend(loc = 'best')
-plt.xlim([0, 60])
+plt.xlim([0, 45])
 plt.xlabel("Hamming Distance")
 plt.ylabel("Cuentas")
 plt.title("Histogram")
 plt.grid()
-plt.savefig(outfile)
+plt.savefig(outfile, dpi = 300)
 
