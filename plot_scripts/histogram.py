@@ -13,6 +13,13 @@ def Gauss(x, A, mean, sigma):
 
     return fx
 
+def normalize(mu, sigma):
+    s = 0
+    for k in range(0, 161):
+        s = s + np.exp(- (k - mu) * (k - mu) / (2 * sigma * sigma))
+
+    return s
+
 ifile = sys.argv[1]
 if not Path(ifile).is_file():
     print("Error!")
@@ -39,7 +46,7 @@ std = np.sqrt(np.sum(y * (x - mean)**2) / np.sum(y))
 p0 = [1, mean, std]
 params, covariance = curve_fit(Gauss, x, y, p0 = p0)
 A_fit, mu_fit, sigma_fit = params
-y_fit = Gauss(x, *params)
+y_fit = Gauss(x, *params) / normalize(mu_fit, sigma_fit)
 
 textstr = '\n'.join((
     'alen = $%s$' % (alen, ),
@@ -65,3 +72,13 @@ plt.legend(prop={'size': 8})
 plt.text(0.70, 0.85, textstr, fontsize = 9, bbox = props)
 plt.grid()
 plt.savefig(outfile, dpi = 300)
+
+
+p = Gauss(0, A_fit, mu_fit, sigma_fit) / normalize(mu_fit, sigma_fit)
+print("prob:", p)
+ncom = 1/p
+print("nro M commits: ", ncom/1000000)
+alpha = 0.95
+N = np.log(1 - alpha) / np.log(1 - p)
+print("nro commits con 95% confianza: ", N / 1000000)
+
