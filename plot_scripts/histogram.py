@@ -7,7 +7,7 @@ from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 from decimal import Decimal
 from pathlib import Path
-from gauss import Gauss, normalize
+from gauss import gauss, normalize
 
 ifile = sys.argv[1]
 if not Path(ifile).is_file():
@@ -33,9 +33,9 @@ y = y/A0
 mean = np.average(x, weights = y)
 std = np.sqrt(np.sum(y * (x - mean)**2) / np.sum(y))
 p0 = [1, mean, std]
-params, covariance = curve_fit(Gauss, x, y, p0 = p0)
+params, covariance = curve_fit(gauss, x, y, p0 = p0)
 A_fit, mu_fit, sigma_fit = params
-y_fit = Gauss(x, *params) / normalize(mu_fit, sigma_fit)
+y_fit = gauss(x, *params) / normalize(mu_fit, sigma_fit)
 
 textstr = '\n'.join((
     'alen = $%s$' % (alen, ),
@@ -63,7 +63,7 @@ plt.grid()
 plt.savefig(outfile, dpi = 300)
 
 
-p = Gauss(0, A_fit, mu_fit, sigma_fit) / normalize(mu_fit, sigma_fit)
+p = gauss(0, A_fit, mu_fit, sigma_fit) / normalize(mu_fit, sigma_fit)
 print("prob:", p)
 ncom = 1/p
 print("nro M commits: ", ncom/1000000)

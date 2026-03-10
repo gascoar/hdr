@@ -1,6 +1,6 @@
 import numpy as np
 
-def Gauss(x, A, mean, sigma):
+def gauss(x, A, mean, sigma):
     fx = A * np.sqrt(2 * np.pi) * np.exp(- (x - mean) * (x - mean) / (2 * sigma * sigma))
 
     return fx
