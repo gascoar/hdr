@@ -7,18 +7,7 @@ from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 from decimal import Decimal
 from pathlib import Path
-
-def Gauss(x, A, mean, sigma):
-    fx = A * np.sqrt(2 * np.pi) * np.exp(- (x - mean) * (x - mean) / (2 * sigma * sigma))
-
-    return fx
-
-def normalize(mu, sigma):
-    s = 0
-    for k in range(0, 161):
-        s = s + np.exp(- (k - mu) * (k - mu) / (2 * sigma * sigma))
-
-    return s
+from gauss import Gauss, normalize
 
 ifile = sys.argv[1]
 if not Path(ifile).is_file():
