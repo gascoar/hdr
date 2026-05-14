@@ -35,7 +35,7 @@ std = np.sqrt(np.sum(y * (x - mean)**2) / np.sum(y))
 p0 = [1, mean, std]
 params, covariance = curve_fit(gauss, x, y, p0 = p0)
 A_fit, mu_fit, sigma_fit = params
-y_fit = gauss(x, *params) / normalize(mu_fit, sigma_fit)
+y_fit = gauss(x, *params)
 
 textstr = '\n'.join((
     'alen = $%s$' % (alen, ),
@@ -61,13 +61,3 @@ plt.legend(prop={'size': 8})
 plt.text(0.70, 0.85, textstr, fontsize = 9, bbox = props)
 plt.grid()
 plt.savefig(outfile, dpi = 300)
-
-
-p = gauss(0, A_fit, mu_fit, sigma_fit) / normalize(mu_fit, sigma_fit)
-print("prob:", p)
-ncom = 1/p
-print("nro M commits: ", ncom/1000000)
-alpha = 0.95
-N = np.log(1 - alpha) / np.log(1 - p)
-print("nro commits con 95% confianza: ", N / 1000000)
-
